@@ -16,7 +16,7 @@
 | 功能                      | HTTP 方法 | 路径                   | 描述                          |
 |---------------------------|-----------|------------------------|-------------------------------|
 | 获取所有工具               | POST      | /api/mcp/tools             | 获取所有工具列表              |
-| 获取所有工具               | POST      | /api/mcp/functools             | 获取openai function call 定义              |
+| 获取function calls工具               | POST      | /api/mcp/functools             | 获取openai function call 定义              |
 | 调用 MCP 工具              | POST      | /api/mcp/tools/call        | 调用 MCP 工具                 |
 | 获取资源列表               | POST      | /api/mcp/resources         | 获取所有资源                  |
 | 获取所有提示               | POST      | /api/mcp/prompts           | 获取所有提示                  |
