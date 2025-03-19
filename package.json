@@ -22,9 +22,10 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.0",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
-    "fastmcp-exampe-server": "^1.0.0",
+    "fastmcp-example-server": "^1.0.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "test1": "^1.0.0"

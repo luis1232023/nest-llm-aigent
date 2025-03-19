@@ -6,7 +6,7 @@
   "mcpServers": {
     "fastmcp-exampe-server": {
       "command": "node",
-      "args": ["./node_modules/fastmcp-exampe-server/build/index.js"],
+      "args": ["./node_modules/fastmcp-example-server/build/index.js"],
       "env": {
         "API_KEY": "key"
       },

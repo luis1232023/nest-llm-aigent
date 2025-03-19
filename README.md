@@ -14,11 +14,11 @@ MCP 的出现带来了极大的灵活性，其最大的优势在于通过开发�
 
 | 功能                      | HTTP 方法 | 路径                   | 描述                          |
 |---------------------------|-----------|------------------------|-------------------------------|
-| 获取所有工具               | POST      | /api/tools             | 获取所有工具列表              |
-| 调用 MCP 工具              | POST      | /api/tools/call        | 调用 MCP 工具                 |
-| 获取资源列表               | POST      | /api/resources         | 获取所有资源                  |
-| 获取所有提示               | POST      | /api/prompts           | 获取所有提示                  |
-| 获取所有工具、资源、提示词 | POST      | /api/all               | 返回格式：`{tools:[],resources:[],prompts:[]}` |
+| 获取所有工具               | POST      | /api/mcp/tools             | 获取所有工具列表              |
+| 调用 MCP 工具              | POST      | /api/mcp/tools/call        | 调用 MCP 工具                 |
+| 获取资源列表               | POST      | /api/mcp/resources         | 获取所有资源                  |
+| 获取所有提示               | POST      | /api/mcp/prompts           | 获取所有提示                  |
+| 获取所有工具、资源、提示词 | POST      | /api/mcp/all               | 返回格式：`{tools:[],resources:[],prompts:[]}` |
 
 4. **示例**  
 （具体示例部分可以根据实际业务流程和 API 返回结构补充填写。）

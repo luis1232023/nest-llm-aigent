@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { StdioMcpClientToFunction } from './common/StdioMcpClientToFunction';
 
 @Injectable()
 export class AppService {
