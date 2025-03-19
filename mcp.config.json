@@ -1,0 +1,18 @@
+{
+  "mcpClient": {
+    "name": "mcp-nestts-client",
+    "version": "1.0.0"
+  },
+  "mcpServers": {
+    "fastmcp-exampe-server": {
+      "command": "node",
+      "args": ["./node_modules/fastmcp-exampe-server/build/index.js"],
+      "env": {
+        "API_KEY": "key"
+      },
+      "disabled": false,
+      "autoApprove": [],
+      "timeout": 10000
+    }
+  }
+}
