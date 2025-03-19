@@ -18,6 +18,20 @@ export class McpController {
       } else {
         return ResponseUtil.success('获取工具列表成功', tools);
       }
+    }
+    
+  /**
+   * 获取所有function call tools工具列表
+   * @returns {Promise<any[]>} 工具列表
+   */
+  @Post('/functools')
+  async getAllFuncTools(): Promise<ResponseI> {
+      const tools = await this.mcpService.getAllFuncTools();
+      if (!tools) {
+        return ResponseUtil.error('获取function call工具列表失败', null);
+      } else {
+        return ResponseUtil.success('获取function call工具列表成功', tools);
+      }
   }
 
   /**

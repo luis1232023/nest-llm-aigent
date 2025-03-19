@@ -20,6 +20,20 @@ export class McpService {
   }
 
   /**
+   * 获取所有工具列表
+   * @returns {Promise<any[]>} 所有工具
+   */
+  async getAllFuncTools(): Promise<any[]> {
+    try {
+        await this.mcpClient.fetchAllMcpServerData();
+        return this.mcpClient.allMcpServer.funcTools // 返回缓存的工具列表
+    } catch (error) {
+        console.error('获取工具列表失败:', error);
+        return null;
+    }
+  }
+
+  /**
    * 获取所有资源列表
    * @returns {Promise<any[]>} 所有工具
    */

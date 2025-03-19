@@ -4,13 +4,27 @@ import * as path from "path";
 import type { McpClientConfig } from "../../global.d";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import type { Tool, Prompt, Resource } from "@modelcontextprotocol/sdk/types.js";
-import { strict } from "assert";
 
 export interface AllMcpServerI {
   tools: Tool[];
+  funcTools: OpenAiFunctionI[];
   resources: Resource[];
   prompts: Prompt[];
 }
+
+export interface OpenAiFunctionI{
+  type: "function";
+  function: {
+    name: string;
+    description: string;
+    parameters?: {
+      type: "object" | "array";
+      properties?: Record<string, any>;
+      required?: string[];
+    } | null;
+  };
+}
+
 
 /**
  * StdioMcpClientToFunction 类
@@ -30,6 +44,8 @@ export class StdioMcpClientToFunction {
 
   /** 工具列表 */
   private tools: Tool[] = [];
+
+  private funcTools: OpenAiFunctionI[] = [];
 
   /** 资源列表 */
   private resources: Resource[] = [];
@@ -207,9 +223,12 @@ export class StdioMcpClientToFunction {
         this.tools.push(...tools);
         this.resources.push(...resources);
         this.prompts.push(...prompts);
+        // 转化function call tools
+        this.mcpToolsToFunctionCallTools();
         // 缓存所有数据
         this.allMcpServer = {
             tools: this.tools,
+            funcTools: this.funcTools,
             resources: this.resources,
             prompts: this.prompts,
         };
@@ -217,7 +236,24 @@ export class StdioMcpClientToFunction {
         console.error("从 MCP 服务器获取数据时出错:", error);
       }
     }
+  }
 
-
+  // 转化mcp tools到function call tools
+  private mcpToolsToFunctionCallTools(){
+    if (!this.tools || (this.tools && this.tools.length <= 0)) {
+      return;
+    }
+    this.funcTools = this.tools.map((tool:Tool) => ({
+        type: "function" as const,
+        function: {
+            name: tool.name as string,
+            description: tool.description as string,
+            parameters: {
+                type: "object",
+                properties: tool.inputSchema.properties as Record<string, unknown>,
+                required: tool.inputSchema.required as string[],
+            },
+        }
+    }));
   }
 }
