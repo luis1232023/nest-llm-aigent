@@ -4,7 +4,7 @@
 /build
 
 # 排除 .env.dev 文件
-.env.dev
+.env
 mcp.config.json
 
 # Logs

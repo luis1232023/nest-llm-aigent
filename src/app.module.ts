@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { McpModule } from './mcp/mcp.module';
 import { ConfigModule } from '@nestjs/config';
-console.log("注入环境变量");
+console.log("注入环境变量NODE_ENV");
 console.log(process.env.NODE_ENV);
 @Module({
   imports: [
