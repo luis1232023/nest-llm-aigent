@@ -1,10 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { LlmAgent } from '../common/LlmAgent'; // 替换为实际路径
 import { StdioMcpClientToFunction } from '../common/StdioMcpServerToFunction'; // 替换为实际路径
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class McpService {
   private readonly mcpClient = StdioMcpClientToFunction.getInstance();
-
+  private readonly configService = new ConfigService();
+  private readonly openAiBaseUrl = this.configService.get('OPENAPI_BASE_URL');
+  private readonly openAiKey = this.configService.get('OPENAPI_KEY');
+  private readonly modelName = this.configService.get('MODEL');
+  private readonly sysPrompt = this.configService.get('SYS_PROMPT');
+  private readonly llmClient = LlmAgent.getInstance(
+    this.mcpClient,
+    this.openAiBaseUrl,
+    this.openAiKey,
+    this.modelName,
+    this.sysPrompt
+  );
+  
   /**
    * 获取所有工具列表
    * @returns {Promise<any[]>} 所有工具
@@ -75,6 +90,24 @@ export class McpService {
     } catch (error) {
         console.error(`调用工具 "${toolName}" 时发生错误:`, error);
         return "";
+    }
+  }
+
+  /**
+   * 异步查询智能代理返回聊天完成消息参数数组
+   *
+   * @param messages 聊天完成消息参数数组
+   * @returns 返回一个包含聊天完成消息参数数组的Promise对象
+   * @throws 如果在查询过程中出现错误，将捕获异常并在控制台输出错误信息，同时返回一个空数组
+  */
+  async queryAgent(messages:ChatCompletionMessageParam[]): Promise<ChatCompletionMessageParam[]> {
+    try {
+        console.log('查询智能代理2:', messages);
+        const result = await this.llmClient.llmQuery(messages);
+        return result;
+    } catch (error) {
+        console.error(`ai agent 时发生错误:`, error);
+        return [];
     }
   }
 }

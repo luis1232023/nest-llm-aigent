@@ -21,6 +21,7 @@
 | 获取资源列表               | POST      | /api/mcp/resources         | 获取所有资源                  |
 | 获取所有提示               | POST      | /api/mcp/prompts           | 获取所有提示                  |
 | 获取所有工具、资源、提示词 | POST      | /api/mcp/all               | 返回格式：`{tools:[],resources:[],prompts:[]}` |
+| 调用llm接口 | POST      | /api/mcp/agent               | 输入格式：messages:["role":"user","content":"你的问题"]，返回messages |
 
 4. **示例**  
 （具体示例部分可以根据实际业务流程和 API 返回结构补充填写。）

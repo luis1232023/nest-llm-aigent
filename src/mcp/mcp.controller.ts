@@ -1,6 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { McpService } from './mcp.service';
 import { ResponseUtil,ResponseI } from '../common/ResponseUtil';
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 @Controller('/api/mcp')
 export class McpController {
@@ -77,5 +78,17 @@ export class McpController {
             return ResponseUtil.error('获取提示词列表失败', null);
         }
         return ResponseUtil.success('获取提示词列表成功', prompts);
+  }
+  
+  @Post('/agent')
+  async queryAgent(@Body('messages') messages:ChatCompletionMessageParam[]): Promise<ResponseI> {
+    try {
+      console.log('查询智能代理:', messages);
+      const result = await this.mcpService.queryAgent(messages);
+      return ResponseUtil.success('查询智能代理成功', result);
+    } catch (error) {
+      console.error('查询智能代理失败:', error);
+      return ResponseUtil.error('查询智能代理失败', null);
     }
+  }
 }
