@@ -46,9 +46,9 @@
     "version": "1.0.0"
   }
 }
+```
 
-
-6. **示例**  
+6. **未来**  
 - 目前mcp server sse协议 server只做了stdio 。
 -  请求时上下文协议及全局变量可以在接口层、mcp client层、mcp server层共享。
 - 目前支持http接口，最好未来可以把这些接口封装成一个socket，更有利于聊天场景。
